@@ -4,9 +4,7 @@ import k3ras.pizzeria.persistence.entity.PizzaEntity;
 import k3ras.pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,26 @@ public class PizzaController {
     @GetMapping
     public ResponseEntity<List<PizzaEntity>> getAll() {
         return ResponseEntity.ok(this.pizzaService.getAll());
+    }
+
+    @GetMapping("/{idPizza}")
+    public ResponseEntity<PizzaEntity> getById(@PathVariable("idPizza") Integer id) {
+        return ResponseEntity.ok(this.pizzaService.getById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<PizzaEntity> addNewPizza(@RequestBody PizzaEntity pizza) {
+        if (pizza.getIdPizza() == null || !this.pizzaService.existsById(pizza.getIdPizza())) {
+            return ResponseEntity.ok(this.pizzaService.save(pizza));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<PizzaEntity> updatePizza(@RequestBody PizzaEntity pizza) {
+        if (pizza.getIdPizza() != null && this.pizzaService.existsById(pizza.getIdPizza())) {
+            return ResponseEntity.ok(this.pizzaService.save(pizza));
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
