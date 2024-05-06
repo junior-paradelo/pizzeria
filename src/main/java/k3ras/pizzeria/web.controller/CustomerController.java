@@ -24,4 +24,5 @@ public class CustomerController {
     public ResponseEntity<CustomerEntity> getByPhone(@PathVariable("phone") String phone) {
         return ResponseEntity.ok(this.customerService.findByPhone(phone));
     }
+
 }

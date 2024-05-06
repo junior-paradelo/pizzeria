@@ -1,6 +1,7 @@
 package k3ras.pizzeria.service;
 
 import k3ras.pizzeria.persistence.entity.OrderEntity;
+import k3ras.pizzeria.persistence.projection.OrderSummary;
 import k3ras.pizzeria.persistence.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,10 @@ public class OrderService {
 
     public List<OrderEntity> getCustomerOrders(String customerId) {
         return this.orderRepository.findCustomerOrders(customerId);
+    }
+
+    public OrderSummary getSummary(int orderId) {
+        OrderSummary summary = this.orderRepository.findSummary(orderId);
+        return summary;
     }
 }
