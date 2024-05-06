@@ -42,7 +42,6 @@ public class OrderService {
     }
 
     public OrderSummary getSummary(int orderId) {
-        OrderSummary summary = this.orderRepository.findSummary(orderId);
-        return summary;
+        return this.orderRepository.findSummary(orderId);
     }
 }
