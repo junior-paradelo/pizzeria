@@ -3,12 +3,14 @@ package k3ras.pizzeria.service;
 import k3ras.pizzeria.persistence.entity.PizzaEntity;
 import k3ras.pizzeria.persistence.repository.PizzaPagSortRepository;
 import k3ras.pizzeria.persistence.repository.PizzaRepository;
+import k3ras.pizzeria.service.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -64,5 +66,10 @@ public class PizzaService {
 
     public void deleteById(Integer id) {
         this.pizzaRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updatePrice(UpdatePizzaPriceDto dto) {
+        this.pizzaRepository.updatePrice(dto);
     }
 }
