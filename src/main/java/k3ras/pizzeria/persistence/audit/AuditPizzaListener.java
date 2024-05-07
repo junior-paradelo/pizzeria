@@ -16,7 +16,7 @@ public class AuditPizzaListener {
         System.out.println("AuditPizzaListener::onPostLoad");
         this.currentValue = SerializationUtils.clone(pizzaEntity);
     }
-
+    
     @PostPersist
     @PostUpdate
     public void onPostPersist(PizzaEntity pizzaEntity) {
