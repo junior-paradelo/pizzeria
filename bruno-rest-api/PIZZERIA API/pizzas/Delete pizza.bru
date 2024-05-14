@@ -1,0 +1,23 @@
+meta {
+  name: Delete pizza
+  type: http
+  seq: 6
+}
+
+delete {
+  url: http://localhost:8080/api/pizzas/7
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: user
+  password: bfcaecdd-dc35-4f0c-8004-1da2499bd571
+}
+
+body:json {
+  {
+    "pizzaId": "1",
+    "price": "10"
+  }
+}
