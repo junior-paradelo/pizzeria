@@ -1,6 +1,7 @@
 package k3ras.pizzeria.service;
 
 import k3ras.pizzeria.persistence.entity.UserEntity;
+import k3ras.pizzeria.persistence.entity.UserRoleEntity;
 import k3ras.pizzeria.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +23,12 @@ public class UserSecurityService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = this.userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found."));
-        return User.builder().username(userEntity.getUsername()).password(userEntity.getPassword()).roles("ADMIN").accountLocked(userEntity.getLocked()).disabled(userEntity.getDisabled()).build();
+        String[] roles = userEntity.getRoles().stream().map(UserRoleEntity::getRole).toArray(String[]::new);
+        return User.builder()
+                .username(userEntity.getUsername())
+                .password(userEntity.getPassword())
+                .roles(roles)
+                .accountLocked(userEntity.getLocked())
+                .disabled(userEntity.getDisabled()).build();
     }
 }
