@@ -1,0 +1,16 @@
+meta {
+  name: get customer
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/api/customers/customer/474771564
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: admin
+  password: admin
+}
